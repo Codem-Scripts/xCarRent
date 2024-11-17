@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./responsive.css">
+    <script src="./vue.js"></script>
+    <script src="./vue.global.js"></script>
+    <script src="./vuex.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="showTimeProgress" id="remain-time-container">
+            <div class="flex relative items-center gap-x-1">
+                <img class="vehicle-image-2" :src="'./assets/images/cars/'+vehicleData?.image">
+                <div class="flex flex-col pl-20 items-start content-start gap-y-2">
+                    <p class="vehicle-name">{{vehicleData?.label}}</p>
+                    <p class="time-left">{{secondsToDate(this.remainTime)}}</p>
+                </div>
+            </div>
+            <div  id="remain-time-progress">
+                <p v-if="timeprogress2?.value">{{(timeprogress2?.value().toFixed(2) * 100).toFixed(0)}}%</p>
+            </div>
+        </div>
+        <div class="rent-container" v-show="menuOpen">
+            <template v-if="currentPage == 'main'">
+                <div class="wrapper py-10 p-6">
+                    <div class="flex mb-16 relative justify-between">
+                        <img v-if="currentPage == 'timeprogress'" @click="setCurrentPage('timeprogress')"
+                            src="./assets/images/button-4.svg">
+                        <img v-else @click="setCurrentPage('timeprogress')" src="./assets/images/button-1.svg">
+                        <div
+                            class="flex flex-1 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  flex-col gap-y-1">
+                            <h1 class="car-rent-title text-center">{{locales.rent}}</h1>
+                            <h2 class="choose-title text-center">{{locales.choose}}</h2>
+
+                        </div>
+                        <img src="./assets/images/button-2.svg" @click="close">
+
+                    </div>
+                    <div class="overflow-auto flex content-start h-[90%] flex-wrap gap-x-6 gap-y-6">
+                        <div @click="selectCategory(category.name)"
+                            class="car-category flex flex-col items-center justify-center"
+                            v-for="category in categories">
+                            <h1>{{category?.label}}</h1>
+                            <img :src="'./assets/images/'+category.icon">
+
+                        </div>
+                    </div>
+                </div>
+
+            </template>
+            <template v-else-if="currentPage == 'rentveh'">
+                <div class="wrapper py-10 p-6">
+                    <div class="flex relative justify-between">
+                        <div class="flex items-center gap-x-3">
+                            <img v-if="currentPage == 'timeprogress'" @click="setCurrentPage('timeprogress')"
+                                src="./assets/images/button-4.svg">
+                            <img v-else @click="setCurrentPage('timeprogress')" src="./assets/images/button-1.svg">
+                            <img @click="selectCategory(false)" src="./assets/images/button-3.svg">
+
+                        </div>
+                        <div
+                            class="flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  flex-col gap-y-1">
+                            <h1 class="car-rent-title text-center">{{locales.rent}}</h1>
+                            <h2 class="choose-title text-center">{{locales.choose}}</h2>
+
+                        </div>
+                        <img src="./assets/images/button-2.svg" @click="close">
+
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <h1 class="category-title"> {{categoryData?.label}}</h1>
+                        <img :src="'./assets/images/'+categoryData.icon">
+
+                    </div>
+                    <div class="overflow-auto flex content-start h-[73%] flex-wrap gap-x-6 gap-y-6">
+                        <div @click="selectVehicle(vehicle.name)"
+                            class="vehicle flex flex-col items-center justify-center" v-for="vehicle in vehiclesData">
+                            <h1>{{vehicle?.label}}</h1>
+                            <img class="vehicle-image" :src="'./assets/images/cars/'+vehicle?.image">
+
+                        </div>
+                    </div>
+
+                </div>
+            </template>
+            <template v-else-if="currentPage == 'vehdetails'">
+                <div class="wrapper py-10 p-6">
+                    <div class="flex mb-12 relative justify-between">
+                        <div class="flex items-center gap-x-3">
+                            <img v-if="currentPage == 'timeprogress'" @click="setCurrentPage('timeprogress')"
+                                src="./assets/images/button-4.svg">
+                            <img v-else @click="setCurrentPage('timeprogress')" src="./assets/images/button-1.svg"> <img
+                                @click="selectVehicle(false)" src="./assets/images/button-3.svg">
+
+                        </div>
+                        <div
+                            class="flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  flex-col gap-y-1">
+                            <h1 class="car-rent-title text-center">{{locales.rent}}</h1>
+                            <h2 class="choose-title text-center">{{locales.choose}}</h2>
+
+                        </div>
+                        <img src="./assets/images/button-2.svg" @click="close">
+
+                    </div>
+                    <div class="w-full h-[15.375+11.25rem] flex gap-x-6">
+                        <div class="vehdetail-1 p-2">
+                            <img class="mx-auto" :src="'./assets/images/'+categoryData.icon">
+                            <p class="vehicle-label relative bottom-4">{{vehicleData?.label}}</p>
+                            <img class="mx-auto " :src="'./assets/images/cars/'+vehicleData?.image">
+                            <div class="flex flex-col  gap-y-2">
+                                <div class="flex justify-between items-center  px-2 gap-x-3">
+                                    <p class="vehicle-stat-text">{{locales.speed}}</p>
+                                    <div class="vehicle-stats">
+                                        <div v-for="i in 6" :class="{'vehicle-stat-full' : vehicleData.speed >= i}"
+                                            class="vehicle-stat"></div>
+
+
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between px-2 gap-x-3">
+                                    <p class="vehicle-stat-text">{{locales.handling}}</p>
+                                    <div class="vehicle-stats">
+                                        <div v-for="i in 6" :class="{'vehicle-stat-full' : vehicleData.handling >= i}"
+                                            class="vehicle-stat"></div>
+
+
+
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between px-2 gap-x-3">
+                                    <p class="vehicle-stat-text">{{locales.Acceleration}}</p>
+                                    <div class="vehicle-stats ">
+                                        <div v-for="i in 6"
+                                            :class="{'vehicle-stat-full' : vehicleData.acceleration >= i}"
+                                            class="vehicle-stat"></div>
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-y-6">
+                            <div class="vehdetail-2 p-8">
+                                <p class="select-time-text">{{locales.select_time}}</p>
+                                <div class="veh-times my-6 flex items-center gap-x-3">
+                                    <div :class="{selected : data.selected}" @click="selectTime(data, key, index)"
+                                        class="veh-time " v-for="(data, key, index) in vehicleData.price">{{data?.label}}
+                                    </div>
+                                </div>
+                                <p class="select-time-text">{{locales.payment_method}}</p>
+                                <div class="flex gap-x-12 mt-3 items-center">
+                                    <div class="flex items-center gap-x-3">
+                                        <div class="payment-method " @click="paymentMethod='bank'"
+                                            :class="{selected : paymentMethod=='bank'}">
+                                            <img src="./assets/images/bank.svg">
+
+                                        </div>
+                                        <div class="flex flex-col gap-y-1">
+                                            <p class="payment-method-title">{{locales.bank}}</p>
+                                            <p class="payment-method-amount">{{locales.currency}}{{bankPrice}}</p>
+
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-x-3">
+                                        <div class="payment-method" @click="paymentMethod='cash'"
+                                            :class="{selected : paymentMethod=='cash'}">
+                                            <img src="./assets/images/cash.svg">
+
+                                        </div>
+                                        <div class="flex flex-col gap-y-1">
+                                            <p class="payment-method-title">{{locales.cash}}</p>
+                                            <p class="payment-method-amount">{{locales.currency}}{{cashPrice}}</p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="vehdetail-3 flex flex-col gap-y-6 items-center justify-between py-8">
+                                <h1 class="rent-text">{{locales.rent_veh}} {{vehicleData?.label}}<br>
+                                    for {{locales.currency}}{{paymentMethod == 'cash' ? cashPrice : bankPrice}} + {{locales.currency}}{{vehicleData.deposit}} {{locales.deposit}}</h1>
+                                <div @click="rentCar" class="start-button">{{locales.start}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div :style="{display : currentPage == 'timeprogress' ?  'block' : 'none'}" class="wrapper py-10 p-6">
+                <div class="flex mb-24 relative justify-between">
+                    <div class="flex items-center gap-x-3">
+                        <img src="./assets/images/button-4.svg">
+                        <img @click="setCurrentPage('main')" src="./assets/images/button-3.svg">
+                    </div>
+                    <div
+                        class="flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  flex-col gap-y-1">
+                        <h1 class="car-rent-title text-center">{{locales.rent}}</h1>
+                        <h2 class="choose-title text-center">{{locales.choose}}</h2>
+
+                    </div>
+                    <img src="./assets/images/button-2.svg" @click="close">
+                </div>
+                <h1 class="time-progress-title text-center">{{locales.time_progress}}</h1>
+                <div class="time-progress" id="time-progress">
+                    <p v-if="!currentTime" v-html="locales.no_car"></p>
+                    <p v-else>{{secondsToDate(this.remainTime)}}</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="./progressbar.js"></script>
+<script src="./index.js"></script>
+
+</html>

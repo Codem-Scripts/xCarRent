@@ -1,0 +1,510 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+@font-face {
+    font-family: TT Norms;
+    src: url(./assets/fonts/TTNorms-Regular.otf);
+}
+
+@font-face {
+    font-family: Gilroy;
+    src: url(./assets/fonts/GILROY-BOLD.TTF);
+}
+
+
+@font-face {
+    font-family: SF Pro Text;
+    src: url(./assets/fonts/SFPRODISPLAYREGULAR.OTF);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background: #FFF;
+}
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    /* background-color: burlywood; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rent-container {
+    width: 60.125rem;
+    height: 40.875rem;
+
+    background-image: url(./assets/images/frame.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+
+    padding: 2rem;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.125rem;
+    background: radial-gradient(183.54% 142.09% at -14.9% -26.4%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.00) 100%), radial-gradient(50% 43.92% at 50% 43.92%, rgba(27, 28, 32, 0.95) 0%, rgba(15, 15, 17, 0.98) 100%), #000;
+}
+
+
+.car-rent-title {
+    color: #FFF;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.choose-title {
+    color: rgba(255, 255, 255, 0.64);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: TT Norms;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.15rem;
+}
+
+.car-category {
+    width: 16.5rem;
+    height: 8.9375rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: radial-gradient(110.41% 121.14% at 100% 95.43%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: all .2s ease;
+    position: relative;
+}
+
+.car-category:hover {
+    opacity: 0.8;
+}
+
+.car-category img {
+    width: 9rem;
+    height: auto;
+}
+
+.vehicle {
+    width: 12rem;
+    height: 7rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: radial-gradient(110.41% 121.14% at 100% 95.43%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: all .2s ease;
+    position: relative;
+}
+
+.vehicle img {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: -15%;
+    width: 17rem;
+    height: auto;
+}
+
+.vehicle h1 {
+    position: relative;
+    bottom: 2.25rem;
+    color: #FFF;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: TT Norms;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.1125rem;
+}
+
+.car-category h1 {
+    position: relative;
+    top: 1.3rem;
+    color: #FFF;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.075rem;
+    text-transform: uppercase;
+}
+
+.time-progress {
+    position: relative;
+    width: 15rem;
+    height: 15rem;
+    margin: 2rem auto;
+    position: relative;
+}
+
+#remain-time-progress {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+}
+
+#remain-time-progress p {
+    color: #00FF3E;
+    color: color(display-p3 0.3294 1 0.3765);
+    text-align: center;
+    font-family: SF Pro Text;
+
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.125rem;
+    /* 128.571% */
+    letter-spacing: -0.0255rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.time-progress p {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+
+}
+
+.category-title {
+    color: #FFF;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1.375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.06875rem;
+}
+
+.time-progress-title {
+    color: #FFF;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1.375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.06875rem;
+    text-transform: uppercase;
+}
+
+.vehdetail-1 {
+    width: 24rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    height: 15.375+11.25rem;
+    background: radial-gradient(91.14% 100% at 50% 100%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(255, 255, 255, 0.03);
+}
+
+.vehdetail-2 {
+    width: 32.5rem;
+    height: 15.375rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    background: radial-gradient(91.14% 100% at 50% 100%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(255, 255, 255, 0.03);
+
+    backdrop-filter: blur(6px);
+}
+
+.vehdetail-3 {
+    width: 32.5rem;
+    height: 11.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: radial-gradient(290.96% 141.42% at 0% 0%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(255, 255, 255, 0.03);
+}
+
+.vehicle-label {
+    color: #FFF;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.125rem;
+}
+
+.start-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.75);
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    width: 10.75rem;
+    height: 2.5625rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: radial-gradient(91.14% 100% at 50% 100%, rgba(255, 255, 255, 0.10) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(255, 255, 255, 0.03);
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+
+.start-button:hover {
+    opacity: 0.8;
+}
+
+.rent-text {
+    color: #FFF;
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.05rem;
+}
+
+.vehicle-stat-text {
+    color: #FFF;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: Zen Dots;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.vehicle-stats {
+    display: flex;
+    column-gap: .2rem;
+}
+
+.vehicle-stat {
+    width: 1.5rem;
+    height: .3rem;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.vehicle-stat-full {
+    background-color: white;
+}
+
+.select-time-text {
+    color: #FFF;
+    leading-trim: both;
+    text-edge: cap;
+    font-feature-settings: 'salt' on;
+    font-family: Zen Dots;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0625rem;
+}
+
+.veh-time {
+    width: 4rem;
+    height: 1.8125rem;
+    border-radius: 0.90625rem;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: Gilroy;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.veh-time:hover {
+    opacity: 0.8;
+}
+
+
+.veh-time.selected {
+    background: #FFF;
+    color: #000;
+}
+
+.payment-method {
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.03);
+    width: 3.125rem;
+    height: 3.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.payment-method:hover {
+    opacity: 0.8;
+}
+
+.payment-method.selected {
+    border: 1px solid rgba(255, 255, 255, 1);
+
+}
+
+.payment-method-title {
+    color: rgba(255, 255, 255, 0.75);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: Gilroy;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.payment-method-amount {
+    color: #FFF;
+    leading-trim: both;
+    text-edge: cap;
+    font-family: Gilroy;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.time-left {
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: SF Pro Text;
+    font-size: 0.87381rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 0.65538rem;
+    /* 75% */
+    letter-spacing: -0.01488rem;
+}
+
+.vehicle-name {
+    color: #898989;
+    color: color(display-p3 0.5368 0.5368 0.5368);
+    text-align: center;
+    font-family: SF Pro Text;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 0.65538rem;
+    /* 80.66% */
+    letter-spacing: -0.01488rem;
+}
+
+.vehicle-image {
+    width: 3.75rem;
+    height: auto;
+
+}
+
+.vehicle-image-2 {
+    width: 7.4375rem;
+    height: auto;
+    position: absolute;
+    left: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+
+#remain-time-container {
+    position: absolute;
+    left: 50%;
+    top: 1rem;
+    transform: translateX(-50%);
+    border-radius: 4.3125rem;
+    background: #000;
+    background: color(display-p3 0 0 0);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 8px 16px 0px color(display-p3 0 0 0 / 0.25);
+    padding: .4125rem .75rem;
+    width: 19.9375rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

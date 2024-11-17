@@ -1,0 +1,30 @@
+locales = {
+    rent = "CAR RENT",
+    choose = "Choose The Desired Category",
+    speed = "Speed",
+    handling = "Handling",
+    acceleration = "Acceleration",
+    handling = "Handling",
+    select_time = "Select the desired time",
+    payment_method = "Choose a payment method",
+    bank = "Bank",
+    cash = "Cash",
+    currency = "$",
+    deposit = "Deposit",
+
+    rent_veh = "Rent",
+    start = "START",
+    time_progress = "TIME PROGRESSBAR",
+    no_car = "there is no<br> rented car",
+    open_menu_target = "Open Menu",
+    open_menu_text = "PRESS E TO OPEN MENU",
+    return_veh = "PRESS E TO RETURN VEHICLE",
+
+    -- Notify
+    notify_1 = "Rent : You already rented a vehicle",
+    notify_2 = "Rent : You don't have enough money",
+    notify_3 = "Rent : Spawn point is occupied",
+    notify_4 = "Rent : You have last %s seconds to return the vehicle",
+    notify_5 = "Rent : Time is up",
+    notify_6 = "Rent : The vehicle is not returnable",
+}
